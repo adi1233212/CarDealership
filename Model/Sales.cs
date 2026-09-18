@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Sales:BaseEntity
+    public class Sales:Cars
     {
 
         private int price;

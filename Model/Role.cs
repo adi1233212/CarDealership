@@ -11,6 +11,6 @@ namespace Model
 
         private string roleName;
 
-        public string roleName1 { get => roleName; set => roleName = value; }
+        public string RoleName { get => roleName; set => roleName = value; }
     }
 }

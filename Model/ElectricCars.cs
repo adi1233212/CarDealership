@@ -11,10 +11,10 @@ namespace Model
 
         private int batteryCapacity;
         private int range;
-        private int chargingTime;
+        private int chargingTimeInMinutes;
 
         public int BatteryCapacity { get => batteryCapacity; set => batteryCapacity = value; }
         public int Range { get => range; set => range = value; }
-        public int ChargingTime { get => chargingTime; set => chargingTime = value; }
+        public int ChargingTimeInMinutes { get => chargingTimeInMinutes; set => chargingTimeInMinutes = value; }
     }
 }
