@@ -22,6 +22,18 @@ namespace ViewModel
             return new Companys();
         }
 
+        static private CompanysList list = new CompanysList();
+
+        public static Companys SelectById(int id)
+        {
+            CompanysDB companysDB = new CompanysDB();
+            list = companysDB.SelectAll();
+
+            Companys c = list.Find(item => item.Id == id);
+            return c;
+        }
+
+
         protected override BaseEntity CreateModel(BaseEntity entity)
 
         {
@@ -30,5 +42,7 @@ namespace ViewModel
             base.CreateModel(entity);
             return c;
         }
+
+
     }
 }

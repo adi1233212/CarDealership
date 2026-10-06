@@ -9,10 +9,10 @@ namespace Model
     public class CarImages:BaseEntity
     {
 
-        private Cars carId;
+        private Cars carID;
         private string imageURL;
 
-        public Cars CarId { get => carId; set => carId = value; }
+        public Cars CarID { get => carID; set => carID = value; }
         public string ImageURL { get => imageURL; set => imageURL = value; }
     }
 }

@@ -13,8 +13,8 @@ namespace Model
         private string model;
         private int price;
         private int carYear;
-        private int carNumber;
-        private string Description;
+        private string carNumber;
+        private string description;
         private string ownerShip;
         private int kilometers;
         private bool isSold;
@@ -23,8 +23,8 @@ namespace Model
         public string Model { get => model; set => model = value; }
         public int Price { get => price; set => price = value; }
         public int CarYear { get => carYear; set => carYear = value; }
-        public int CarNumber { get => carNumber; set => carNumber = value; }
-        public string Description1 { get => Description; set => Description = value; }
+        public string CarNumber { get => carNumber; set => carNumber = value; }
+        public string Description { get => description; set => description = value; }
         public string OwnerShip { get => ownerShip; set => ownerShip = value; }
         public int Kilometers { get => kilometers; set => kilometers = value; }
         public bool IsSold { get => isSold; set => isSold = value; }

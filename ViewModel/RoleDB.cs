@@ -22,6 +22,17 @@ namespace ViewModel
             return new Role();
         }
 
+        static private RoleList list = new RoleList();
+
+        public static Role SelectById(int id)
+        {
+            RoleDB roleDB = new RoleDB();
+            list = roleDB.SelectAll();
+
+            Role r = list.Find(item => item.Id == id);
+            return r;
+        }
+
         protected override BaseEntity CreateModel(BaseEntity entity)
 
         {

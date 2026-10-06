@@ -9,14 +9,14 @@ namespace Model
     public class Inquiries:BaseEntity
     {
 
-        private Users userId;
-        private Cars carId;
+        private Users userID;
+        private Cars carID;
         private string message;
-        private DateTime InquiriesDate;
+        private DateTime inquiriesdate;
 
-        public Users UserId { get => userId; set => userId = value; }
-        public Cars CarId { get => carId; set => carId = value; }
+        public Users UserID { get => userID; set => userID = value; }
+        public Cars CarID { get => carID; set => carID = value; }
         public string Message { get => message; set => message = value; }
-        public DateTime InquiriesDate1 { get => InquiriesDate; set => InquiriesDate = value; }
+        public DateTime Inquiriesdate { get => inquiriesdate; set => inquiriesdate = value; }
     }
 }
