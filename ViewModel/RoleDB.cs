@@ -42,5 +42,27 @@ namespace ViewModel
             return r;
         }
 
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Role r = entity as Role;
+            if (r != null)
+            {
+                string sqlStr = $"UPDATE Role SET RoleName = @RoleName WHERE ID=@ID ";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@UserID", r.RoleName));
+                command.Parameters.Add(new OleDbParameter("@ID", r.Id));
+            }
+        }
     }
 }

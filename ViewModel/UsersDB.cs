@@ -46,5 +46,31 @@ namespace ViewModel
             return u;
         }
 
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Users u = entity as Users;
+            if (u != null)
+            {
+                string sqlStr = $"UPDATE Users SET Name = @Name , Email =@Email , Pass =@Pass , RoleID =@RoleID , IsActive =@IsActive  WHERE ID=@ID ";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@Name", u.Name));
+                command.Parameters.Add(new OleDbParameter("@Email", u.Email));
+                command.Parameters.Add(new OleDbParameter("@Pass", u.Pass));
+                command.Parameters.Add(new OleDbParameter("@RoleID", u.RoleID));
+                command.Parameters.Add(new OleDbParameter("@IsActive", u.IsActive));
+                command.Parameters.Add(new OleDbParameter("@ID", u.Id));
+            }
+        }
     }
 }

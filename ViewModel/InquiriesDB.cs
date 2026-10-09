@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model;
+
 using System.Data.OleDb;
 
 namespace ViewModel
@@ -41,12 +41,37 @@ namespace ViewModel
             Inquiries i = entity as Inquiries;
             i.UserID = UsersDB.SelectById((int)reader["UserID"]);
             i.CarID = CarsDB.SelectById(int.Parse(reader["CarID"].ToString()));
-            i.Message = reader["CarID"].ToString();
+            i.Message = reader["Message"].ToString();
             i.Inquiriesdate =DateTime.Parse(reader["InquiriesDate"].ToString());
 
             base.CreateModel(entity);
             return i;
         }
 
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Inquiries i = entity as Inquiries;
+            if (i != null)
+            {
+                string sqlStr = $"UPDATE Inquiries SET UserID = @UserID , CarID = @CarID , Message =@Message ,InquiriesDate =@InquiriesDate WHERE ID=@ID ";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@UserID", i.UserID));
+                command.Parameters.Add(new OleDbParameter("@CarID", i.CarID));
+                command.Parameters.Add(new OleDbParameter("@Message", i.Message));
+                command.Parameters.Add(new OleDbParameter("@InquiriesDate", i.Inquiriesdate));
+                command.Parameters.Add(new OleDbParameter("@ID", i.Id));
+            }
+        }
     }
 }

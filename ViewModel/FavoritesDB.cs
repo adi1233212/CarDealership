@@ -44,6 +44,29 @@ namespace ViewModel
             return f;
         }
 
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Favorites f = entity as Favorites;
+            if (f != null)
+            {
+                string sqlStr = $"UPDATE Favorites SET UserID = @UserID , CarID = @CarID  WHERE ID=@ID ";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@UserID", f.UserID));
+                command.Parameters.Add(new OleDbParameter("@CarID", f.CarID));
+                command.Parameters.Add(new OleDbParameter("@ID", f.Id));
+            }
+        }
     }
 
 }

@@ -43,6 +43,27 @@ namespace ViewModel
             return c;
         }
 
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
 
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Companys c = entity as Companys;
+            if (c != null)
+            {
+                string sqlStr = $"UPDATE Companys SET CompanyName = @CompanyName  WHERE ID=@ID ";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@CompanyName", c.CompanyName));
+                command.Parameters.Add(new OleDbParameter("@ID", c.Id));
+            }
+        }
     }
 }

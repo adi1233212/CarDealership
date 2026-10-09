@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,5 +51,38 @@ namespace ViewModel
             return c;
         }
 
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Cars c = entity as Cars;
+            if (c != null)
+            {
+                string sqlStr = $"UPDATE Cars SET Company = @Company , Modle = @Modle , Price = @Price " +
+                    $", CarYear = @CarYear , CarNumber =@CarNumber , Description = @Description , OwnerShip = @OwnerShip" +
+                    $", Kilometers =@Kilometers , IsSold =@IsSold WHERE ID=@ID ";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@Company", c.Company.CompanyName));
+                command.Parameters.Add(new OleDbParameter("@Modle", c.Model));
+                command.Parameters.Add(new OleDbParameter("@Price", c.Price));
+                command.Parameters.Add(new OleDbParameter("@CarYear", c.CarYear));
+                command.Parameters.Add(new OleDbParameter("@CarNumber", c.CarNumber));
+                command.Parameters.Add(new OleDbParameter("@Description", c.Description));
+                command.Parameters.Add(new OleDbParameter("@OwnerShip", c.OwnerShip));
+                command.Parameters.Add(new OleDbParameter("@Kilometers", c.Kilometers));
+                command.Parameters.Add(new OleDbParameter("@IsSold", c.IsSold));
+                command.Parameters.Add(new OleDbParameter("@ID", c.Id));
+
+            }
+        }
     }
 }
