@@ -9,10 +9,10 @@ namespace Model
     public class Sales:Cars
     {
 
-        private int price;
+        private int saleprice;
         private DateTime saleDate;
 
-        public int Price { get => price; set => price = value; }
+        public int SalePrice { get => saleprice; set => saleprice = value; }
         public DateTime SaleDate { get => saleDate; set => saleDate = value; }
     }
 }

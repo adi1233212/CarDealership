@@ -79,6 +79,15 @@ namespace Test
                 Console.WriteLine($"the car is: {ec.Company.CompanyName},{ec.Model} the BatteryCapacity is: {ec.BatteryCapacity} the Range is: {ec.Range} the ChargingTimeInHours is: {ec.ChargingTime}");
                 Console.WriteLine("-------------------------------------");
             }
+            Console.WriteLine("-----------------Sale--------------");
+            SalesList sales;
+            SalesDB salesDB = new SalesDB();
+            sales = salesDB.SelectAll();
+            foreach (Sales s in sales)
+            {
+                Console.WriteLine($"the car is: {s.Company.CompanyName},{s.Model} the SalePrice is: {s.SalePrice} the SaleDate is: {s.SaleDate.Day}/{s.SaleDate.Month}/{s.SaleDate.Year}");
+                Console.WriteLine("-------------------------------------");
+            }
         }
     }
 }
