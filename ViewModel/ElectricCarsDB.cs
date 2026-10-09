@@ -8,14 +8,14 @@ using System.Data.OleDb;
 
 namespace ViewModel
 {
-    public class ElectricCarsDB:CarsDB
+    public class ElectricCarsDB : CarsDB
     {
         public ElectricCarsList SelectAll()
         {
             command.CommandText = $"SELECT Cars.Id, Cars.Company, Cars.Model, Cars.Price," +
                 $" Cars.CarYear, Cars.CarNumber, Cars.Description, Cars.Ownership, " +
                 $"Cars.Kilometers, Cars.IsSold, ElectricCars.BatteryCapacity," +
-                $" ElectricCars.Range,ElectricCars.[Charging Time] " +
+                $" ElectricCars.Range,ElectricCars.[ChargingTime] " +
                 $"FROM (Cars INNER JOIN ElectricCars ON Cars.Id = ElectricCars.Id)";
 
             ElectricCarsList ecars = new ElectricCarsList(base.Select());
@@ -33,14 +33,37 @@ namespace ViewModel
 
         {
             ElectricCars ec = entity as ElectricCars;
-            
+
             ec.BatteryCapacity = int.Parse(reader["BatteryCapacity"].ToString());
             ec.Range = int.Parse(reader["Range"].ToString());
-            ec.ChargingTime = reader["Charging Time"].ToString();
+            ec.ChargingTime = reader["ChargingTime"].ToString();
             base.CreateModel(entity);
             return ec;
         }
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            ElectricCars ec = entity as ElectricCars;
+            if (ec != null)
+            {
+                string sqlStr = $"UPDATE ElectricCars SET BatteryCapacity = @BatteryCapacity , Range = @Range , ChargingTime = @ChargingTime WHERE ID=@ID";
 
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@OwnerShip", ec.OwnerShip));
+                command.Parameters.Add(new OleDbParameter("@Kilometers", ec.Kilometers));
+                command.Parameters.Add(new OleDbParameter("@BatteryCapacity", ec.BatteryCapacity));
+                command.Parameters.Add(new OleDbParameter("@Range", ec.Range));
+                command.Parameters.Add(new OleDbParameter("@ChargingTime", ec.ChargingTime));
+            }
+        }
 
+        public override void Update(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
     }
 }

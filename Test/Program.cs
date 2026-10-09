@@ -14,6 +14,17 @@ namespace Test
             {
                 Console.WriteLine($"the id is: {r.Id} the Role Name is: { r.RoleName}");
             }
+            Console.WriteLine("----------------RoleUpdate---------------");
+            Role roleToUpdate = roles[0];
+            roleToUpdate.RoleName = "א";
+            roleDB.Update(roleToUpdate);
+            int ru= roleDB.SaveChanges();
+            Console.WriteLine($"{ru} rows were updated");
+            foreach (Role r in roles)
+            {
+                Console.WriteLine($"the id is: {r.Id} the Role Name is: {r.RoleName}");
+                Console.WriteLine("-------------------------------------");
+            }
             Console.WriteLine("-----------------Companys-------------------");
             CompanysList companys;
             CompanysDB companysDB = new CompanysDB();
@@ -24,6 +35,17 @@ namespace Test
                 Console.WriteLine("-------------------------------------");
 
             }
+            Console.WriteLine("----------------CompanysUpdate---------------");
+            Companys companysToUpdate = companys[0];
+            companysToUpdate.CompanyName = "א";
+            companysDB.Update(roleToUpdate);
+            int cu = companysDB.SaveChanges();
+            Console.WriteLine($"{cu} rows were updated");
+            foreach (Companys c in companys)
+            {
+                Console.WriteLine($"the id is: {c.Id} the Company Name: {c.CompanyName}");
+                Console.WriteLine("-------------------------------------");
+            }
             Console.WriteLine("-----------------Users-----------------");
             UsersList users;
             UsersDB usersDB = new UsersDB();
@@ -33,6 +55,17 @@ namespace Test
                 Console.WriteLine($"the user id is: {u.Id} the user Name: {u.Name} the user Email is: {u.Email} the user Pss is: {u.Pass} the user Role is: {u.RoleID.RoleName} is the user active: {u.IsActive}");
                 Console.WriteLine("-------------------------------------");
 
+            }
+            Console.WriteLine("----------------UsersUpdate---------------");
+            Users usersToUpdate = users[0];
+            companysToUpdate.CompanyName = "א";
+            roleDB.Update(roleToUpdate);
+            int cu = roleDB.SaveChanges();
+            Console.WriteLine($"{cu} rows were updated");
+            foreach (Companys u in companys)
+            {
+                Console.WriteLine($"the user id is: {u.Id} the user Name: {u.Name} the user Email is: {u.Email} the user Pss is: {u.Pass} the user Role is: {u.RoleID.RoleName} is the user active: {u.IsActive}");
+                Console.WriteLine("-------------------------------------");
             }
             Console.WriteLine("----------------Cars-------------------");
             CarsList cars;

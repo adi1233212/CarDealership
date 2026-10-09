@@ -39,6 +39,30 @@ namespace ViewModel
             return s;
         }
 
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Sales s = entity as Sales;
+            if (s != null)
+            {
+                string sqlStr = $"UPDATE Sales SET SalePrice = @SalePrice , SaleDate = @SaleDate WHERE ID=@ID";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@Price", s.Price));
+                command.Parameters.Add(new OleDbParameter("@SalePrice", s.SalePrice));
+                command.Parameters.Add(new OleDbParameter("@SaleDate", s.SaleDate));
+            }
+        }
+
+        public override void Update(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
+
 
 
     }
