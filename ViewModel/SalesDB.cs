@@ -29,27 +29,24 @@ namespace ViewModel
 
         static private SalesList list = new SalesList();
 
-        protected override BaseEntity CreateModel(BaseEntity entity)
-
-        {
-            Sales s = entity as Sales;
-            s.SalePrice = int.Parse(reader["SalePrice"].ToString());
-            s.SaleDate= DateTime.Parse(reader["SaleDate"].ToString());
-            base.CreateModel(entity);
-            return s;
-        }
-
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Sales s = entity as Sales;
+
             if (s != null)
             {
-                string sqlStr = $"UPDATE Sales SET SalePrice = @SalePrice , SaleDate = @SaleDate WHERE ID=@ID";
+                string sqlStr = "UPDATE Sales SET SalePrice = ?, SaleDate = ? WHERE ID = ?";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@Price", s.Price));
-                command.Parameters.Add(new OleDbParameter("@SalePrice", s.SalePrice));
-                command.Parameters.Add(new OleDbParameter("@SaleDate", s.SaleDate));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(new OleDbParameter("@SalePrice", s.SalePrice));
+
+                OleDbParameter dateParam = new OleDbParameter("@SaleDate", OleDbType.Date);
+                dateParam.Value = s.SaleDate;
+                cmd.Parameters.Add(dateParam);
+
+                cmd.Parameters.Add(new OleDbParameter("@ID", s.Id));
             }
         }
 

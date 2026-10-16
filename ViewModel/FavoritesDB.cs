@@ -54,19 +54,24 @@ namespace ViewModel
             throw new NotImplementedException();
         }
 
+
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Favorites f = entity as Favorites;
+
             if (f != null)
             {
-                string sqlStr = $"UPDATE Favorites SET UserID = @UserID , CarID = @CarID  WHERE ID=@ID ";
+                string sqlStr = "UPDATE Favorites SET UserID = ?, CarID = ? WHERE ID = ?";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@UserID", f.UserID));
-                command.Parameters.Add(new OleDbParameter("@CarID", f.CarID));
-                command.Parameters.Add(new OleDbParameter("@ID", f.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(new OleDbParameter("@UserID", f.UserID.Id));
+                cmd.Parameters.Add(new OleDbParameter("@CarID", f.CarID.Id));
+                cmd.Parameters.Add(new OleDbParameter("@ID", f.Id));
             }
         }
+
     }
 
 }

@@ -61,28 +61,34 @@ namespace ViewModel
             throw new NotImplementedException();
         }
 
+
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Cars c = entity as Cars;
+
             if (c != null)
             {
-                string sqlStr = $"UPDATE Cars SET Company = @Company , Modle = @Modle , Price = @Price " +
-                    $", CarYear = @CarYear , CarNumber =@CarNumber , Description = @Description , OwnerShip = @OwnerShip" +
-                    $", Kilometers =@Kilometers , IsSold =@IsSold WHERE ID=@ID ";
+                string sqlStr = @"UPDATE Cars
+                          SET Company = ?, Model = ?, Price = ?,
+                              CarYear = ?, CarNumber = ?, [Description] = ?,
+                              OwnerShip = ?, Kilometers = ?, IsSold = ?
+                          WHERE ID = ?";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@Company", c.Company.CompanyName));
-                command.Parameters.Add(new OleDbParameter("@Modle", c.Model));
-                command.Parameters.Add(new OleDbParameter("@Price", c.Price));
-                command.Parameters.Add(new OleDbParameter("@CarYear", c.CarYear));
-                command.Parameters.Add(new OleDbParameter("@CarNumber", c.CarNumber));
-                command.Parameters.Add(new OleDbParameter("@Description", c.Description));
-                command.Parameters.Add(new OleDbParameter("@OwnerShip", c.OwnerShip));
-                command.Parameters.Add(new OleDbParameter("@Kilometers", c.Kilometers));
-                command.Parameters.Add(new OleDbParameter("@IsSold", c.IsSold));
-                command.Parameters.Add(new OleDbParameter("@ID", c.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Clear();
 
+                cmd.Parameters.Add(new OleDbParameter("@Company", c.Company.Id));
+                cmd.Parameters.Add(new OleDbParameter("@Model", c.Model));
+                cmd.Parameters.Add(new OleDbParameter("@Price", c.Price));
+                cmd.Parameters.Add(new OleDbParameter("@CarYear", c.CarYear));
+                cmd.Parameters.Add(new OleDbParameter("@CarNumber", c.CarNumber));
+                cmd.Parameters.Add(new OleDbParameter("@Description", c.Description));
+                cmd.Parameters.Add(new OleDbParameter("@OwnerShip", c.OwnerShip));
+                cmd.Parameters.Add(new OleDbParameter("@Kilometers", c.Kilometers));
+                cmd.Parameters.Add(new OleDbParameter("@IsSold", c.IsSold));
+                cmd.Parameters.Add(new OleDbParameter("@ID", c.Id));
             }
         }
+
     }
 }

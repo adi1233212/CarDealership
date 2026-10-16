@@ -58,20 +58,31 @@ namespace ViewModel
             throw new NotImplementedException();
         }
 
+
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Inquiries i = entity as Inquiries;
+
             if (i != null)
             {
-                string sqlStr = $"UPDATE Inquiries SET UserID = @UserID , CarID = @CarID , Message =@Message ,InquiriesDate =@InquiriesDate WHERE ID=@ID ";
+                string sqlStr = @"UPDATE Inquiries
+                          SET UserID = ?, CarID = ?, [Message] = ?, InquiriesDate = ?
+                          WHERE ID = ?";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@UserID", i.UserID));
-                command.Parameters.Add(new OleDbParameter("@CarID", i.CarID));
+
+                command.Parameters.Add(new OleDbParameter("@UserID", i.UserID.Id));
+                command.Parameters.Add(new OleDbParameter("@CarID", i.CarID.Id));
                 command.Parameters.Add(new OleDbParameter("@Message", i.Message));
-                command.Parameters.Add(new OleDbParameter("@InquiriesDate", i.Inquiriesdate));
+
+                OleDbParameter dateParam = new OleDbParameter("@InquiriesDate", OleDbType.Date);
+                dateParam.Value = i.Inquiriesdate;
+                command.Parameters.Add(dateParam);
+
                 command.Parameters.Add(new OleDbParameter("@ID", i.Id));
             }
         }
+
+
     }
 }

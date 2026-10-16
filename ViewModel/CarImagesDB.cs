@@ -54,10 +54,24 @@ namespace ViewModel
             throw new NotImplementedException();
         }
 
+
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            CarImages ci = entity as CarImages;
+
+            if (ci != null)
+            {
+                string sqlStr = "UPDATE CarImages SET CarID = ?, ImageURL = ? WHERE ID = ?";
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(new OleDbParameter("@CarID", ci.CarID.Id));
+                cmd.Parameters.Add(new OleDbParameter("@ImageURL", ci.ImageURL));
+                cmd.Parameters.Add(new OleDbParameter("@ID", ci.Id));
+            }
         }
+
     }
 
 }
