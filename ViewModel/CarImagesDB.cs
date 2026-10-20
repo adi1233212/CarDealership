@@ -51,7 +51,17 @@ namespace ViewModel
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            CarImages ci = entity as CarImages;
+
+            if (ci != null)
+            {
+                string sqlStr = "Insert INTO CarImages (CarID,ImageURL)" +
+                    " VALUES (?,?)";
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@CarID", ci.CarID.Id));
+                cmd.Parameters.Add(new OleDbParameter("@ImageURL", ci.ImageURL));
+            }
         }
 
 

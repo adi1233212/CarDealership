@@ -49,7 +49,13 @@ namespace ViewModel
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Role r = entity as Role;
+            if (r != null)
+            {
+                string sqlStr = $"Insert INTO Role (RoleName) VALUES (@rName)";
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@rName", r.RoleName));
+            }
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)

@@ -12,5 +12,10 @@ namespace Model
         private string companyName;
 
         public string CompanyName { get => companyName; set => companyName = value; }
+
+        public override string ToString()
+        {
+            return this.companyName + " " + this.Id;
+        }
     }
 }

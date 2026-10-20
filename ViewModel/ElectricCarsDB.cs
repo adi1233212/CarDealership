@@ -65,5 +65,35 @@ namespace ViewModel
                 updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
             }
         }
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            ElectricCars ec = entity as ElectricCars;
+            if (ec != null)
+            {
+                string sqlStr = @"INSERT INTO ElectricCars
+            (ID, BatteryCapacity, [Range], [ChargingTime])
+            VALUES (?, ?, ?, ?)";
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(new OleDbParameter("@ID", ec.Id));
+                cmd.Parameters.Add(new OleDbParameter("@BatteryCapacity", ec.BatteryCapacity));
+                cmd.Parameters.Add(new OleDbParameter("@Range", ec.Range));
+                cmd.Parameters.Add(new OleDbParameter("@ChargingTime", ec.ChargingTime));
+            }
+        }
+
+
+
+
+        public override void Insert(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+
+                inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
+        }
+
     }
 }

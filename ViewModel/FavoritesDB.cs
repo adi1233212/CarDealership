@@ -51,7 +51,18 @@ namespace ViewModel
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Favorites f = entity as Favorites;
+
+            if (f != null)
+            {
+                string sqlStr = $"Insert INTO Favorites (UserID,CarID)" +
+                    $" VALUES (@UserID,@CarID)";
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@UserID", f.UserID.Id));
+                cmd.Parameters.Add(new OleDbParameter("@CarID", f.CarID.Id));
+                cmd.Parameters.Add(new OleDbParameter("@ID", f.Id));
+            }
         }
 
 

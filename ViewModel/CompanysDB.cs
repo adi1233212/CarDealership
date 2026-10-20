@@ -50,7 +50,15 @@ namespace ViewModel
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Companys c = entity as Companys;
+            if (c != null)
+            {
+                string sqlStr = $"Insert INTO Companys (CompanyName) VALUES (@cName)";
+                command.CommandText = sqlStr ;
+                command.Parameters.Add(new OleDbParameter("@cName", c.CompanyName));
+            }
+                
+            
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)

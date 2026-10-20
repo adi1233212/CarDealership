@@ -55,7 +55,26 @@ namespace ViewModel
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Inquiries i = entity as Inquiries;
+
+            if (i != null)
+            {
+
+                string sqlStr = $"Insert INTO Inquiries (UserID,CarID,Message,InquiriesDate)" +
+                    $" VALUES (@UserID,@CarID,@Message,@InquiriesDate)";
+
+                command.CommandText = sqlStr;
+
+                command.Parameters.Add(new OleDbParameter("@UserID", i.UserID.Id));
+                command.Parameters.Add(new OleDbParameter("@CarID", i.CarID.Id));
+                command.Parameters.Add(new OleDbParameter("@Message", i.Message));
+
+                OleDbParameter dateParam = new OleDbParameter("@InquiriesDate", OleDbType.Date);
+                dateParam.Value = i.Inquiriesdate;
+                command.Parameters.Add(dateParam);
+
+                command.Parameters.Add(new OleDbParameter("@ID", i.Id));
+            }
         }
 
 

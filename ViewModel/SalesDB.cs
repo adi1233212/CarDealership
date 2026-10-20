@@ -59,6 +59,37 @@ namespace ViewModel
                 updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
             }
         }
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Sales s = entity as Sales;
+
+            if (s != null)
+            {
+                string sqlStr = @"INSERT INTO Sales (SalePrice, SaleDate) VALUES (?, ?)";
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(new OleDbParameter("@SalePrice", s.SalePrice));
+
+                OleDbParameter dateParam = new OleDbParameter("@SaleDate", OleDbType.Date);
+                dateParam.Value = s.SaleDate;
+                cmd.Parameters.Add(dateParam);
+
+                cmd.Parameters.Add(new OleDbParameter("@ID", s.Id));
+            }
+        }
+
+
+
+
+        public override void Insert(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+
+            inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+            inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
+        }
 
 
 
