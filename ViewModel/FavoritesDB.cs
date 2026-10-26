@@ -46,7 +46,14 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Favorites f = entity as Favorites;
+            if (f != null)
+            {
+                string sqlStr = $"Delete FROM Favorites where id=@fid";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@fid", f.Id));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)

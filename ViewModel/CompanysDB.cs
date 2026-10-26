@@ -45,7 +45,14 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Companys c = entity as Companys;
+            if (c != null)
+            {
+                string sqlStr = $"Delete FROM Companys where id=@cid";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@cid", c.Id));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)

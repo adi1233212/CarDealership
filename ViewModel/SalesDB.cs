@@ -79,10 +79,6 @@ namespace ViewModel
                 cmd.Parameters.Add(new OleDbParameter("@ID", s.Id));
             }
         }
-
-
-
-
         public override void Insert(BaseEntity entity)
         {
             BaseEntity reqEntity = this.NewEntity();
@@ -90,6 +86,36 @@ namespace ViewModel
             inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
             inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
         }
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Sales s = entity as Sales;
+            if (s != null)
+            {
+                string sqlStr = $"DELETE FROM Sales where id=@sid";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@sid", s.Id));
+            }
+
+
+        }
+
+        public virtual void Delete(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                deleted.Add(new ChangeEntity(this.CreateDeletedSQL, entity));
+                deleted.Add(new ChangeEntity(base.CreateDeletedSQL, entity));
+            }
+        }
+
+
+
+
+
+
+
 
 
 

@@ -53,7 +53,16 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Cars c = entity as Cars;
+
+            if (c != null)
+            {
+                string sqlStr = $"UPDATE Cars SET IsSold ={true} WHERE ID = ?";
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new OleDbParameter("@ID", c.Id));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
