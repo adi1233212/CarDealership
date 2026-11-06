@@ -65,18 +65,17 @@ namespace ViewModel
 
             if (s != null)
             {
-                string sqlStr = @"INSERT INTO Sales (SalePrice, SaleDate) VALUES (?, ?)";
+                string sqlStr = "INSERT INTO Sales (ID, SalePrice, SaleDate) VALUES (?, ?, ?)";
 
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Clear();
 
+                cmd.Parameters.Add(new OleDbParameter("@ID", s.Id));
                 cmd.Parameters.Add(new OleDbParameter("@SalePrice", s.SalePrice));
 
                 OleDbParameter dateParam = new OleDbParameter("@SaleDate", OleDbType.Date);
                 dateParam.Value = s.SaleDate;
                 cmd.Parameters.Add(dateParam);
-
-                cmd.Parameters.Add(new OleDbParameter("@ID", s.Id));
             }
         }
         public override void Insert(BaseEntity entity)

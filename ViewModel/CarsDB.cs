@@ -71,8 +71,10 @@ namespace ViewModel
 
             if (c != null)
             {
-                string sqlStr = $"Insert INTO Cars (Company,Model,Price,CarYear,CarNumber,Description,OwnerShip,Kilometers,IsSold)" +
-                    $" VALUES (@Company,@Model,@Price,@CarYear,@CarNumber,@Description,@OwnerShip,@Kilometers,@IsSold)";
+                string sqlStr = @"INSERT INTO Cars
+            (Company, Model, Price, CarYear, CarNumber, [Description],
+             OwnerShip, Kilometers, IsSold)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Clear();
@@ -86,7 +88,6 @@ namespace ViewModel
                 cmd.Parameters.Add(new OleDbParameter("@OwnerShip", c.OwnerShip));
                 cmd.Parameters.Add(new OleDbParameter("@Kilometers", c.Kilometers));
                 cmd.Parameters.Add(new OleDbParameter("@IsSold", c.IsSold));
-                cmd.Parameters.Add(new OleDbParameter("@ID", c.Id));
             }
         }
 

@@ -57,14 +57,14 @@ namespace Test
             //CompanysDB cdb = new();
             //Companys myCompany = new Companys() { CompanyName = "Alfa Romeo" };
             //cdb.Insert(myCompany);
-            //cu = cdb.SaveChanges();
-            //Console.WriteLine($"{cu} rows instred");
+            //int ccu = cdb.SaveChanges();
+            //Console.WriteLine($"{ccu} rows instred");
 
             //Console.WriteLine("----------------CompanysDelete---------------");
             //Companys c1 = companys[0];
             //cdb.Delete(c1);
-            //cu = cdb.SaveChanges();
-            //Console.WriteLine($"{cu} rows Delte");
+            //int cccu = cdb.SaveChanges();
+            //Console.WriteLine($"{cccu} rows Delte");
 
             Console.WriteLine("-----------------Users-----------------");
             UsersList users;
@@ -91,15 +91,30 @@ namespace Test
             //Console.WriteLine("----------------UsersInsert---------------");
 
             //UsersDB udb = new();
-            //Users myUsers = new Users() { Name = "Romeo Block" , Email = "fdsf", Pass = "fsdwe" , RoleID = roles[1],IsActive = true};
+            //Users myUsers = new Users() { Name = "Romeo Block", Email = "fdsf", Pass = "fsdwe", RoleID = roles[1], IsActive = true };
             //udb.Insert(myUsers);
             //int uuu = udb.SaveChanges();
             //Console.WriteLine($"{uuu} rows instred");
             //Console.WriteLine("----------------UsersDelete---------------");
-            //Users u1 = users[0];
-            //usersDB.Delete(u1);
-            //int ud = usersDB.SaveChanges();
-            //Console.WriteLine($"{ud} rows Delte");
+
+            //users = usersDB.SelectAll();
+
+            //Console.WriteLine("Users count: " + users.Count);
+
+            //if (users.Count > 0)
+            //{
+            //    Users u1 = users[0];
+
+            //    usersDB.Delete(u1);
+
+            //    int ud = usersDB.SaveChanges();
+
+            //    Console.WriteLine($"{ud} rows Deleted");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("There are no users to delete");
+            //}
 
             Console.WriteLine("----------------Cars-------------------");
             CarsList cars;
@@ -127,15 +142,28 @@ namespace Test
 
             //Console.WriteLine("----------------CarsInsert---------------");
             //CarsDB ccdb = new();
-            //Cars myCars = new Cars() { Company = companys[6], Price = 4500, CarYear = 2021, CarNumber = "7564758", Description = "fdsfsfsd" , OwnerShip = "03", Kilometers = 32421 , IsSold = false};
+            //Cars myCars = new Cars() { Company = companys[6], Model = "Toyota Corolla", Price = 4500, CarYear = 2021, CarNumber = "7564758", Description = "fdsfsfsd", OwnerShip = "03", Kilometers = 32421, IsSold = false };
             //ccdb.Insert(myCars);
             //int ccc = ccdb.SaveChanges();
             //Console.WriteLine($"{ccc} rows instred");
             //Console.WriteLine("----------------CarsDelete---------------");
-            //Cars c1 = cars[0];
-            //carsDB.Delete(c1);
-            //int cccc = carsDB.SaveChanges();
-            //Console.WriteLine($"{cccc} rows Delte");
+
+            //cars = carsDB.SelectAll();
+
+            //if (cars.Count > 0)
+            //{
+            //    Cars cc1 = cars[0];
+
+            //    carsDB.Delete(cc1);
+
+            //    int cccc = carsDB.SaveChanges();
+
+            //    Console.WriteLine($"{cccc} rows Deleted");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("There are no cars to delete");
+            //}
 
             Console.WriteLine("-----------------Inquiries--------------");
             InquiriesList inquiries;
@@ -175,11 +203,25 @@ namespace Test
             //int inn = indb.SaveChanges();
             //Console.WriteLine($"{inn} rows instred");
             //Console.WriteLine("----------------InquiriesDelete---------------");
-            //Inquiries i1 = inquiries[0];
-            //inquiriesDB.Delete(i1);
-            //int ia = inquiriesDB.SaveChanges();
-            //Console.WriteLine($"{ia} rows Delte");
 
+            //inquiries = inquiriesDB.SelectAll();
+
+            //Console.WriteLine("Inquiries count: " + inquiries.Count);
+
+            //if (inquiries.Count > 0)
+            //{
+            //    Inquiries i1 = inquiries[0];
+
+            //    inquiriesDB.Delete(i1);
+
+            //    int result = inquiriesDB.SaveChanges();
+
+            //    Console.WriteLine($"{result} rows Deleted");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("There are no inquiries to delete");
+            //}
             Console.WriteLine("-----------------Favorites--------------");
             FavoritesList favorites;
             FavoritesDB favoritesDB = new FavoritesDB();
@@ -201,15 +243,24 @@ namespace Test
 
             //Console.WriteLine("----------------FavoritesInsert---------------");
             //FavoritesDB fdb = new();
-            //Favorites myFavorites = new Favorites() { UserID = users[3], CarID = cars[3]};
+            //Favorites myFavorites = new Favorites() { UserID = users[3], CarID = cars[3] };
             //fdb.Insert(myFavorites);
             //int fff = fdb.SaveChanges();
             //Console.WriteLine($"{fff} rows instred");
             //Console.WriteLine("----------------FavoritesDelete---------------");
-            //Favorites i1 = favorites[0];
-            //favoritesDB.Delete(i1);
-            //int fa = favoritesDB.SaveChanges();
-            //Console.WriteLine($"{fa} rows Delte");
+            //favorites = favoritesDB.SelectAll();
+
+            //if (favorites.Count > 0)
+            //{
+            //    Favorites f1 = favorites[0];
+            //    favoritesDB.Delete(f1);
+            //    int fa = favoritesDB.SaveChanges();
+            //    Console.WriteLine($"{fa} rows Deleted");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("There are no favorites to delete");
+            //}
             Console.WriteLine("-----------------CarImages--------------");
             CarImagesList carImages;
             CarImagesDB carImagesDB = new CarImagesDB();
@@ -227,23 +278,48 @@ namespace Test
             //carImagesDB.Update(carImagesToUpdate);
             //int cii = carImagesDB.SaveChanges();
             //Console.WriteLine($"{cii} rows were updated");
-            //foreach (CarImages ci in carImages)
-            //{
-            //    Console.WriteLine($"the car is: {ci.CarID.Id},{ci.CarID.Model},{ci.CarID.Company},{ci.CarID.Price} and the car pic: {ci.ImageURL}");
-            //    Console.WriteLine("-------------------------------------");
-            //}
             //Console.WriteLine("----------------CarImagesInsert---------------");
-            //CarImagesDB cidb = new();
-            //CarImages myCarImages = new CarImages() { CarID = cars[11] , ImageURL = "fsdfsdhgfsdj"};
-            //cidb.Insert(myCarImages);
-            //int cii1 = cidb.SaveChanges();
-            //Console.WriteLine($"{cii1} rows instred");
-            //Console.WriteLine("----------------CarImagesDelete---------------");
-            //CarImages ci1 = carImages[0];
-            //carImagesDB.Delete(ci1);
-            //int caa = carImagesDB.SaveChanges();
-            //Console.WriteLine($"{caa} rows Delte");
 
+            //CarImagesDB cidb = new CarImagesDB();
+
+            //if (cars.Count > 0)
+            //{
+            //    CarImages myCarImages = new CarImages()
+            //    {
+            //        CarID = cars[0],
+            //        ImageURL = "fsdfsdhgfsdj"
+            //    };
+
+            //    cidb.Insert(myCarImages);
+
+            //    int cii1 = cidb.SaveChanges();
+
+            //    Console.WriteLine($"{cii1} rows inserted");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("There are no cars in the database.");
+            //}
+            //Console.WriteLine("----------------CarImagesDelete---------------");
+
+            //carImages = carImagesDB.SelectAll();
+
+            //Console.WriteLine("CarImages count: " + carImages.Count);
+
+            //if (carImages.Count > 0)
+            //{
+            //    CarImages ci1 = carImages[0];
+
+            //    carImagesDB.Delete(ci1);
+
+            //    int caa = carImagesDB.SaveChanges();
+
+            //    Console.WriteLine($"{caa} rows Deleted");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("There are no car images to delete");
+            //}
             Console.WriteLine("-----------------ElectircCars--------------");
             ElectricCarsList electricCars;
             ElectricCarsDB electricCarsDB = new ElectricCarsDB();
@@ -266,16 +342,30 @@ namespace Test
 
             //Console.WriteLine("----------------ElectircCarsInsert---------------");
             //ElectricCarsDB ecdb = new();
-            //ElectricCars myElectricCars = new ElectricCars() {Company = companys[3],Model = "fsdfsdh",Price = 150000, CarYear = 2025,CarNumber = "12345678",Description = "Electric car",OwnerShip = "00",Kilometers = 0,IsSold = false,BatteryCapacity = 324,Range = 332,ChargingTime = "32"};
+            //ElectricCars myElectricCars = new ElectricCars() { Company = companys[3], Model = "fsdfsdh", Price = 150000, CarYear = 2025, CarNumber = "12345678", Description = "Electric car", OwnerShip = "00", Kilometers = 0, IsSold = false, BatteryCapacity = 324, Range = 332, ChargingTime = "32" };
             //ecdb.Insert(myElectricCars);
             //int cee = ecdb.SaveChanges();
             //Console.WriteLine($"{cee} rows instred");
             //Console.WriteLine("----------------ElectircCarsDelete---------------");
-            //ElectricCars ec1 = electricCars[0];
-            //electricCarsDB.Delete(ec1);
-            //int ce = electricCarsDB.SaveChanges();
-            //Console.WriteLine($"{ce} rows Delte");
 
+            //electricCars = electricCarsDB.SelectAll();
+
+            //Console.WriteLine("ElectricCars count: " + electricCars.Count);
+
+            //if (electricCars.Count > 0)
+            //{
+            //    ElectricCars ec1 = electricCars[0];
+
+            //    electricCarsDB.Delete(ec1);
+
+            //    int ce = electricCarsDB.SaveChanges();
+
+            //    Console.WriteLine($"{ce} rows Deleted");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("There are no electric cars to delete");
+            //}
             Console.WriteLine("-----------------Sale--------------");
             SalesList sales;
             SalesDB salesDB = new SalesDB();
@@ -297,15 +387,32 @@ namespace Test
 
             //Console.WriteLine("----------------SaleInsert---------------");
             //SalesDB sidb = new();
-            //Sales mySales = new Sales() { Company = companys[3], Model = "fsdfsdh", Price = 150000, CarYear = 2025, CarNumber = "12345678", Description = "Electric car", OwnerShip = "01", Kilometers = 4567, IsSold = true , SaleDate = DateTime.Now , SalePrice = 31241 };
+            //Sales mySales = new Sales() { Company = companys[3], Model = "fsdfsdh", Price = 150000, CarYear = 2025, CarNumber = "12345678", Description = "Electric car", OwnerShip = "01", Kilometers = 4567, IsSold = true, SaleDate = DateTime.Now, SalePrice = 31241 };
             //sidb.Insert(mySales);
             //int ssc = sidb.SaveChanges();
             //Console.WriteLine($"{ssc} rows instred");
             //Console.WriteLine("----------------SaleDelete---------------");
-            //Sales s1 = sales[0];
-            //salesDB.Delete(s1);
-            //int sss = salesDB.SaveChanges();
-            //Console.WriteLine($"{sss} rows Delte");
+
+            //sales = salesDB.SelectAll();
+
+            //Console.WriteLine("Sales count: " + sales.Count);
+
+            //if (sales.Count > 0)
+            //{
+            //    Sales s1 = sales[0];
+
+            //    salesDB.Delete(s1);
+
+            //    int sss = salesDB.SaveChanges();
+
+            //    Console.WriteLine($"{sss} rows Deleted");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("There are no sales to delete");
+            //}
         }
     }
 }
+
+

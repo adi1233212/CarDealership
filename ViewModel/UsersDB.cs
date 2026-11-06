@@ -80,17 +80,19 @@ namespace ViewModel
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Users u = entity as Users;
+
             if (u != null)
             {
-                string sqlStr = $"UPDATE Users SET Name = @Name , Email =@Email , Pass =@Pass , RoleID =@RoleID , IsActive =@IsActive  WHERE ID=@ID ";
+                string sqlStr = "UPDATE Users SET Name = ?, Email = ?, Pass = ?, RoleID = ?, IsActive = ? WHERE ID = ?";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@Name", u.Name));
-                command.Parameters.Add(new OleDbParameter("@Email", u.Email));
-                command.Parameters.Add(new OleDbParameter("@Pass", u.Pass));
-                command.Parameters.Add(new OleDbParameter("@RoleID", u.RoleID));
-                command.Parameters.Add(new OleDbParameter("@IsActive", u.IsActive));
-                command.Parameters.Add(new OleDbParameter("@ID", u.Id));
+                cmd.CommandText = sqlStr;
+
+                cmd.Parameters.Add(new OleDbParameter("@Name", u.Name));
+                cmd.Parameters.Add(new OleDbParameter("@Email", u.Email));
+                cmd.Parameters.Add(new OleDbParameter("@Pass", u.Pass));
+                cmd.Parameters.Add(new OleDbParameter("@RoleID", u.RoleID.Id));
+                cmd.Parameters.Add(new OleDbParameter("@IsActive", u.IsActive));
+                cmd.Parameters.Add(new OleDbParameter("@ID", u.Id));
             }
         }
     }
