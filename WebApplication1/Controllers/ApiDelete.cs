@@ -76,7 +76,7 @@ namespace WebApplication1.Controllers
             return c;
         }
         [HttpDelete]
-        public int DeleteCarImages(CarImages carImages)
+        public int DeleteCarImages(CarImages carImages)    
         {
             CarImagesDB carImagesDB = new CarImagesDB();
             carImagesDB.Delete(carImages);
