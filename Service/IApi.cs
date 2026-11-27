@@ -9,77 +9,77 @@ namespace Service
 {
     public interface IApi
     {
-        public UsersList GetAllUsers ();
+        public Task<UsersList> GetAllUsers ();
         
-        public int UpdateAllUsers ();
+        public Task<int> UpdateAllUsers (Users users);
 
-        public int InsertAllUsers();
+        public Task<int> InsertAllUsers(Users users);
 
-        public int DeleteAllUsers();
+        public Task<int> DeleteAllUsers(int id);
 
-        public SalesList GetAllSale();
+        public Task<SalesList> GetAllSale();
 
-        public int UpdateAllSale();
+        public Task<int> UpdateAllSale(Sales sales);
 
-        public int InsertAllSale();
+        public Task<int> InsertAllSale(Sales sales);
 
-        public int DeleteAllSales();
+        public Task<int> DeleteAllSales(int id);
 
-        public RoleList GetAllRole();
+        public Task<RoleList> GetAllRole();
 
-        public int UpdateAllRole();
+        public Task<int> UpdateAllRole(Role role);
 
-        public int InsertAllRole();
+        public Task<int> InsertAllRole(Role role);
 
-        public int DeleteAllRole();
+        public Task<int> DeleteAllRole(int id);
 
-        public InquiriesList GetAllInquiries();
+        public Task<InquiriesList> GetAllInquiries();
 
-        public int UpdateAllInquiries();
+        public Task<int> UpdateAllInquiries(Inquiries inquiries);
 
-        public int InsertAllInquiries();
+        public Task<int> InsertAllInquiries(Inquiries inquiries);
 
-        public int DeleteAllInquiries();
+        public Task<int> DeleteAllInquiries(int id);
 
-        public FavoritesList GetAllFavorites();
+        public Task<FavoritesList> GetAllFavorites();
 
-        public int UpdateAllFavorites();
+        public Task<int> UpdateAllFavorites(Favorites favorites);
 
-        public int InsertAllFavorites();
+        public Task<int> InsertAllFavorites(Favorites favorites);
 
-        public int DeleteAllFavorites();
+        public Task<int> DeleteAllFavorites(int id);
 
-        public ElectricCarsList GetAllElectricCars();
+        public Task<ElectricCarsList> GetAllElectricCars();
 
-        public int UpdateAllElectricCars();
+        public Task<int> UpdateAllElectricCars(ElectricCars electricCars);
 
-        public int InsertAllElectricCars();
+        public Task<int> InsertAllElectricCars(ElectricCars electricCars);
 
-        public int DeleteAllElectricCars();
+        public Task<int> DeleteAllElectricCars(int id);
 
-        public CompanysList GetAllCompanys();
+        public Task<CompanysList> GetAllCompanys();
 
-        public int UpdateAllCompanys();
+        public Task<int> UpdateAllCompanys(Companys companys);
 
-        public int InsertAllCompanys();
+        public Task<int> InsertAllCompanys(Companys companys);
 
-        public int DeleteAllCompanys();
+        public Task<int> DeleteAllCompanys(int id);
 
-        public CarsList GetAllCar();
+        public Task<CarsList> GetAllCar();
 
-        public int UpdateAllCar();
+        public Task<int> UpdateAllCar(Cars cars);
 
-        public int InsertAllCar();
+        public Task<int> InsertAllCar(Cars cars);
 
-        public int DeleteAllCar();
+        public Task<int> DeleteAllCar(int id);
 
-        public CarImagesList GetAllCarImages();
+        public Task<CarImagesList> GetAllCarImages();
 
-        public int UpdateAllCarImages();
+        public Task<int> UpdateAllCarImages(CarImages carImages);
 
-        public int InsertAllCarImages();
+        public Task<int> InsertAllCarImages(CarImages carImages);
 
-        public int DeleteAllCarImages();
+        public Task<int> DeleteAllCarImages(int id);
 
     }
 }
